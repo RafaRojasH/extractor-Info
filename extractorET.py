@@ -2,7 +2,7 @@
 import streamlit as st
 import re
 import pandas as pd
-from PyPDF2 import PdfReader
+import PyPDF2
 
 st.set_page_config(page_title="Extractor de Estado de la Técnica", layout="wide")
 st.title("📄 Extractor de datos de reportes del IMPI")
@@ -40,7 +40,7 @@ def extraer_info(texto):
 archivo = st.file_uploader("📤 Sube tu archivo PDF", type="pdf")
 
 if archivo:
-    reader = PdfReader(archivo)
+    reader = PyPDF2.PdfReader(archivo)
     texto = "\n".join(page.extract_text() for page in reader.pages if page.extract_text())
     
     resultados = extraer_info(texto)
